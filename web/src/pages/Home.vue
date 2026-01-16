@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
   <UContainer class="py-4">
     <div class="mb-4 flex justify-end">
-      <UButton label="Ajouter un terrain" icon="i-lucide-plus" />
+      <UButton label="Ajouter un terrain" icon="i-lucide-plus" to="/terrains/create" />
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <UCard v-for="terrain in terrains" :key="terrain.id" :ui="{ header: 'p-0 sm:p-0' }">

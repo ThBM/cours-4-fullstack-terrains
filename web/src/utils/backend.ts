@@ -45,5 +45,34 @@ export const backend = {
         }[]
       >('/terrains')
     },
+
+    create(params: {
+      nom: string
+      latitude: number
+      longitude: number
+      surface: number
+      surfaceConstructible: number
+      prix: number
+      longueurFacade: number
+      orientationFacade: 'NORD' | 'SUD' | 'EST' | 'OUEST'
+    }) {
+      return backendFetch<Terrain>('/terrains', {
+        method: 'POST',
+        body: params,
+      })
+    },
   },
+}
+
+export type Terrain = {
+  id: string
+  nom: string
+  latitude: number
+  longitude: number
+  surface: number
+  surfaceConstructible: number
+  prix: number
+  longueurFacade: number
+  orientationFacade: string
+  userId: string
 }

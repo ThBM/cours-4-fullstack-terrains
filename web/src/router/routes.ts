@@ -16,4 +16,9 @@ export const routes: RouteRecordRaw[] = [
     path: '/login',
     component: () => import('@/pages/Login.vue'),
   },
+  {
+    name: 'create-terrain',
+    path: '/terrains/create',
+    component: () => import('@/pages/CreateTerrain.vue'),
+  },
 ]
