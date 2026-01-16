@@ -3,5 +3,5 @@
 </script>
 
 <template>
-  <div>Login Page</div>
+  <UContainer>Login</UContainer>
 </template>

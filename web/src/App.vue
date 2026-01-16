@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
 
 <template>
-  <RouterView />
+  <UApp>
+    <UHeader title="My App" />
+    <RouterView />
+  </UApp>
 </template>
 
 <style scoped></style>

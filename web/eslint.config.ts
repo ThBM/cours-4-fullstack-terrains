@@ -20,4 +20,13 @@ export default defineConfigWithVueTs(
   vueTsConfigs.recommended,
 
   skipFormatting,
+
+  // Custom rules
+  {
+    name: 'app/pages-override',
+    files: ['src/pages/**/*.vue'],
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
 )
