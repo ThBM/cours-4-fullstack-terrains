@@ -1,0 +1,25 @@
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+  # minio:
+  #   image: minio/minio
+  #   command: server /data --console-address ":9001"
+  #   ports:
+  #     - "9000:9000"
+  #     - "9001:9001"
+  rustfs:
+    image: rustfs/rustfs
+    command: /data
+    ports:
+      - "9000:9000"
+      - "9001:9001"

@@ -1,0 +1,37 @@
+meta {
+  name: PUT /terrains/:id
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{host}}/terrains/:id
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 4fc106d0-d19f-4628-bbeb-e6822162c448
+}
+
+body:json {
+  {
+      "nom": "Lille 99",
+      "latitude": 49,
+      "longitude": 2,
+      "surface": 800,
+      "surfaceConstructible": 200,
+      "prix": 70000,
+      "longueurFacade": 8,
+      "orientationFacade": "SUD"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  ABC
+}

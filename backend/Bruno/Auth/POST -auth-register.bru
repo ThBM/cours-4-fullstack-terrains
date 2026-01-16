@@ -1,0 +1,24 @@
+meta {
+  name: POST /auth/register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/auth/register
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "john",
+    "password": "password123",
+    "name": "John"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
