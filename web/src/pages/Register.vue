@@ -30,7 +30,7 @@ const onSubmit = async (event: FormSubmitEvent<formSchema>) => {
 </script>
 
 <template>
-  <UContainer class="py-2">
+  <UContainer class="py-4">
     <UCard>
       <template #header>
         <h3 class="font-bold text-xl">Inscription à l'application</h3>
