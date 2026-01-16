@@ -3,8 +3,10 @@
 
 <template>
   <UApp>
-    <UHeader title="My App" />
-    <RouterView />
+    <UHeader title="Gestion de terrains" />
+    <UMain>
+      <RouterView />
+    </UMain>
   </UApp>
 </template>
 
