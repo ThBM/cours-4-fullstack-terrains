@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import ListView from '@/components/ListView.vue';
+import MapView from '@/components/MapView.vue';
 import { backend } from '@/utils/backend';
 import { onMounted, ref } from 'vue';
 
@@ -27,30 +29,20 @@ onMounted(() => {
   getTerrains();
 });
 
+const view = ref<'list' | 'map'>('list');
 </script>
 
 <template>
   <UContainer class="py-4">
-    <div class="mb-4 flex justify-end">
+    <div class="mb-4 flex justify-between">
+      <UTabs :content="false" v-model="view" :items="{
+        list: { label: 'Liste', icon: 'i-lucide-list' },
+        map: { label: 'Carte', icon: 'i-lucide-map' },
+      }" />
       <UButton label="Ajouter un terrain" icon="i-lucide-plus" to="/terrains/create" />
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <UCard v-for="terrain in terrains" :key="terrain.id" :ui="{ header: 'p-0 sm:p-0' }">
-        <template #header>
-          <div class="h-50 bg-gray-200">
-            <img v-if="terrain.photos.length > 0" :src="terrain.photos[0]!.url" class="h-full w-full object-cover" />
-          </div>
-        </template>
 
-        <div class="space-y-2">
-          <h3 class="font-bold text-lg">{{ terrain.nom }}</h3>
-          <p><strong>Surface :</strong> {{ terrain.surface }} m²</p>
-          <p><strong>Surface Constructible :</strong> {{ terrain.surfaceConstructible }} m²</p>
-          <p><strong>Prix :</strong> {{ terrain.prix }} €</p>
-          <p><strong>Longueur de la Façade :</strong> {{ terrain.longueurFacade }} m</p>
-          <p><strong>Orientation de la Façade :</strong> {{ terrain.orientationFacade }}</p>
-        </div>
-      </UCard>
-    </div>
+    <ListView v-if="view === 'list'" :terrains="terrains" />
+    <MapView v-if="view === 'map' && terrains.length > 0" :terrains="terrains" class="h-200" />
   </UContainer>
 </template>

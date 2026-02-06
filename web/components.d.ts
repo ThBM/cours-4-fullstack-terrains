@@ -11,6 +11,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ListView: typeof import('./src/components/ListView.vue')['default']
+    MapView: typeof import('./src/components/MapView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     UApp: typeof import('./node_modules/.pnpm/@nuxt+ui@4.3.0_@babel+parser@7.28.6_@floating-ui+dom@1.7.4_@tiptap+extension-drag-handl_148a301b695e1012df27cc62a962f922/node_modules/@nuxt/ui/dist/runtime/components/App.vue')['default']
@@ -24,5 +26,7 @@ declare module 'vue' {
     UInput: typeof import('./node_modules/.pnpm/@nuxt+ui@4.3.0_@babel+parser@7.28.6_@floating-ui+dom@1.7.4_@tiptap+extension-drag-handl_148a301b695e1012df27cc62a962f922/node_modules/@nuxt/ui/dist/runtime/components/Input.vue')['default']
     UMain: typeof import('./node_modules/.pnpm/@nuxt+ui@4.3.0_@babel+parser@7.28.6_@floating-ui+dom@1.7.4_@tiptap+extension-drag-handl_148a301b695e1012df27cc62a962f922/node_modules/@nuxt/ui/dist/runtime/components/Main.vue')['default']
     USelect: typeof import('./node_modules/.pnpm/@nuxt+ui@4.3.0_@babel+parser@7.28.6_@floating-ui+dom@1.7.4_@tiptap+extension-drag-handl_148a301b695e1012df27cc62a962f922/node_modules/@nuxt/ui/dist/runtime/components/Select.vue')['default']
+    USwitch: typeof import('./node_modules/.pnpm/@nuxt+ui@4.3.0_@babel+parser@7.28.6_@floating-ui+dom@1.7.4_@tiptap+extension-drag-handl_148a301b695e1012df27cc62a962f922/node_modules/@nuxt/ui/dist/runtime/components/Switch.vue')['default']
+    UTabs: typeof import('./node_modules/.pnpm/@nuxt+ui@4.3.0_@babel+parser@7.28.6_@floating-ui+dom@1.7.4_@tiptap+extension-drag-handl_148a301b695e1012df27cc62a962f922/node_modules/@nuxt/ui/dist/runtime/components/Tabs.vue')['default']
   }
 }

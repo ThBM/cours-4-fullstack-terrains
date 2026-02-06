@@ -1,7 +1,7 @@
 import { ofetch } from 'ofetch'
 
 const backendFetch = ofetch.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: process.env.NUXT_PUBLIC_BACKEND_URL || 'http://localhost:3000',
   onRequest({ options }) {
     const token = localStorage.getItem('token')
     if (token) {
@@ -98,4 +98,5 @@ export type Terrain = {
   longueurFacade: number
   orientationFacade: string
   userId: string
+  photos: { id: string; url: string }[]
 }
