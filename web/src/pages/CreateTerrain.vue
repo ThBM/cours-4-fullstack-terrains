@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { z } from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui';
 import { backend } from '@/utils/backend';
@@ -18,20 +18,46 @@ const formSchema = z.object({
   prix: z.number().min(0),
   longueurFacade: z.number().min(0),
   orientationFacade: z.enum(['NORD', 'SUD', 'EST', 'OUEST']),
+  photos: z.file().array(),
 })
 
 type FormSchema = z.infer<typeof formSchema>
 
-const form = reactive<Partial<FormSchema>>({})
+const form = reactive<Partial<FormSchema>>({
+  // dummy values for easier testing
+  // nom: 'Terrain de test',
+  // latitude: 48.8566,
+  // longitude: 2.3522,
+  // surface: 1000,
+  // surfaceConstructible: 800,
+  // prix: 50000,
+  // longueurFacade: 20,
+  // orientationFacade: 'SUD',
+})
+
+const loading = ref(false);
 
 const onSubmit = async (event: FormSubmitEvent<FormSchema>) => {
-  const response = await backend.terrains.create(event.data);
-  toast.add({
-    title: 'Terrain créé',
-    description: `Le terrain "${response.nom}" a été créé avec succès.`,
-  })
+  try {
+    loading.value = true;
 
-  await router.push('/');
+    const response = await backend.terrains.create(event.data);
+
+    toast.add({
+      title: 'Terrain créé',
+      description: `Le terrain "${response.nom}" a été créé avec succès.`,
+    })
+
+    await router.push('/');
+  } catch (error) {
+    toast.add({
+      title: 'Erreur',
+      description: error instanceof Error ? error.message : 'Une erreur est survenue lors de la création du terrain.',
+      color: 'danger',
+    })
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 
@@ -84,7 +110,13 @@ const onSubmit = async (event: FormSubmitEvent<FormSchema>) => {
         </div>
 
         <div>
-          <UButton type="submit" color="primary" label="Créer le terrain" />
+          <UFormField name="photos" label="Photos du terrain" required>
+            <UFileUpload v-model="form.photos" accept="image/*" multiple class="w-96 min-h-48" />
+          </UFormField>
+        </div>
+
+        <div>
+          <UButton type="submit" color="primary" label="Créer le terrain" :loading="loading" />
         </div>
       </UForm>
     </UCard>

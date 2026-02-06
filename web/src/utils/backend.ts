@@ -46,7 +46,7 @@ export const backend = {
       >('/terrains')
     },
 
-    create(params: {
+    async create(params: {
       nom: string
       latitude: number
       longitude: number
@@ -55,11 +55,34 @@ export const backend = {
       prix: number
       longueurFacade: number
       orientationFacade: 'NORD' | 'SUD' | 'EST' | 'OUEST'
+      photos: File[]
     }) {
-      return backendFetch<Terrain>('/terrains', {
+      const response = await backendFetch<Terrain>('/terrains', {
         method: 'POST',
-        body: params,
+        body: {
+          nom: params.nom,
+          latitude: params.latitude,
+          longitude: params.longitude,
+          surface: params.surface,
+          surfaceConstructible: params.surfaceConstructible,
+          prix: params.prix,
+          longueurFacade: params.longueurFacade,
+          orientationFacade: params.orientationFacade,
+        },
       })
+
+      for (const photo of params.photos) {
+        // Send multipart/form-data request to add photo
+        const formData = new FormData()
+        formData.append('file', photo)
+
+        await backendFetch(`/terrains/${response.id}/photos`, {
+          method: 'POST',
+          body: formData,
+        })
+      }
+
+      return response
     },
   },
 }
